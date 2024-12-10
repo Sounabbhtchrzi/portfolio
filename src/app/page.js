@@ -16,24 +16,24 @@ const backgrounds = [
 const projects = [
   {
     id: 1,
-    title: "Flight Local (B2B Travel Solution)",
+    title: "Genius Gen",
     category: "Web Development",
-    image: "/flight-local.jpg?height=600&width=800",
-    link: "#"
+    image: "/project1.png?height=600&width=800",
+    link: "https://genius-gen.vercel.app"
   },
   {
     id: 2,
-    title: "AI Lab Granada",
+    title: "Code Unity",
     category: "Web Development",
-    image: "/ai-lab.jpg?height=600&width=800",
-    link: "#"
+    image: "/project2.png?height=600&width=800",
+    link: "https://code-unity.vercel.app"
   },
   {
     id: 3,
-    title: "Khora – Urban Thinkers Consultancy",
+    title: "Buzz",
     category: "Web Development",
-    image: "/khora.jpg?height=600&width=800",
-    link: "#"
+    image: "/project3.png?height=600&width=800",
+    link: "https://buzz-s3.vercel.app"
   }
 ]
 
@@ -42,7 +42,6 @@ const categories = ["All", "Web Development", "Data Visualization"]
 export default function Home() {
   const [currentBackground, setCurrentBackground] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState("All")
   const sectionRefs = useRef([])
 
   useEffect(() => {
@@ -78,9 +77,6 @@ export default function Home() {
     }
   }, [])
 
-  const filteredProjects = selectedCategory === "All" 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory)
 
   return (
     <main className="min-h-screen">
@@ -104,18 +100,22 @@ export default function Home() {
             opacity: scrollProgress * 0.5
           }}
         />
-        {backgrounds.slice(1).map((bg, index) => (
-          <Image
-            key={bg}
-            src={bg}
-            alt={`Background ${index + 2}`}
-            fill
-            style={{ objectFit: 'cover' }}
-            className={`transition-opacity duration-1000 ${
-              index + 1 === currentBackground ? 'opacity-100' : 'opacity-0'
-            }`}
-          />
-        ))}
+        {backgrounds.slice(1).map((bg, index) => {
+          if (index + 1 === 1 || index + 1 === 2) return null;
+          return (
+            <Image
+              key={bg}
+              src={bg}
+              alt={`Background ${index + 2}`}
+              fill
+              style={{ objectFit: 'cover' }}
+              className={`transition-opacity duration-1000 ${
+                index + 1 === currentBackground ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          );
+        })}
+
       </div>
       <Header />
       <section
@@ -129,8 +129,7 @@ export default function Home() {
             BHATTACHARJEE
           </h1>
           <p className="text-xl text-white mb-8">
-            I AM AN UNDERGRAD STUDENT AND AN ASPIRING UX/UI FULL STACK WEB DEVELOPER. I HAVE MANY YEARS OF EXPERIENCE IN
-            CONSULTING IN ALL AREAS OF DIGITAL. I LOVE MINIMAL AND BRUTALIST DESIGN. I LOVE ANIME.
+            I AM AN UNDERGRAD STUDENT PURSUING COMPUTER SCIENCE ENGINEERING IN TECHNO MAIN SALT LAKE AND AN ASPIRING FULL STACK WEB DEVELOPER. I LOVE ANIME WHICH EXPLAINS THE DESIGN FOR THIS WEBSITE.
           </p>
           <a
             href="/SB-Resume.pdf" 
@@ -199,8 +198,8 @@ export default function Home() {
               <span className="text-gray-500">&lt;h3&gt;</span>
               <p className="px-4 py-2">
                 Experienced in both<br />
-                functional and OOP: Dart,<br />
-                Python, Java, JavaScript,<br />
+                functional and OOP: Python,<br />
+                Java, C, JavaScript,<br />
                 TypeScript.
               </p>
               <span className="text-gray-500">&lt;/h3&gt;</span>
@@ -217,9 +216,9 @@ export default function Home() {
             <div className="font-mono text-sm text-gray-400">
               <span className="text-gray-500">&lt;h3&gt;</span>
               <p className="px-4 py-2">
-                Passionate about UI/UX. Over<br />
-                5 years of development<br />
-                experience in HTML, CSS, JS,<br />
+                Passionate and aspiring about UI/UX.<br />
+                Still learning about development<br />
+                in HTML, CSS, JS,<br />
                 React and NextJS frameworks.
               </p>
               <span className="text-gray-500">&lt;/h3&gt;</span>
@@ -237,9 +236,10 @@ export default function Home() {
               <span className="text-gray-500">&lt;h3&gt;</span>
               <p className="px-4 py-2">
                 Skilled in developing<br />
-                hybrid mobile apps and<br />
-                cross-platform solutions<br />
-                using the Flutter framework.
+                scalable backend systems<br />
+                and API solutions using<br />
+                NodeJs and MongoDB, delivering<br />
+                efficient server-side applications
               </p>
               <span className="text-gray-500">&lt;/h3&gt;</span>
             </div>
@@ -251,28 +251,9 @@ export default function Home() {
         className="min-h-screen flex flex-col items-center justify-start p-8 bg-black bg-opacity-50"
       >
         <h2 className="text-6xl font-bold text-white mb-8">My Projects</h2>
-        <div className="flex gap-4 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-md transition-colors ${
-                selectedCategory === category
-                  ? 'bg-yellow-400 text-black'
-                  : 'bg-[#1a1a1a] text-white hover:bg-[#2a2a2a]'
-              }`}
-            >
-              {category}
-              {selectedCategory === category && category !== "All" && (
-                <span className="ml-2 text-xs">
-                  {filteredProjects.length.toString().padStart(2, '0')}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
+        <br/>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <a
               key={project.id}
               href={project.link}
@@ -304,7 +285,7 @@ export default function Home() {
         <div className="w-full md:w-1/2 bg-gray-800 p-8 rounded-lg">
           <h3 className="text-3xl text-white mb-6">Send me a message</h3>
           <form
-            action="https://formspree.io/f/{your_form_id}" // Replace with your Formspree ID or backend endpoint
+            action="https://formspree.io/f/xbljekzp" 
             method="POST"
             className="space-y-4"
           >
@@ -357,7 +338,7 @@ export default function Home() {
             <span className="text-xl">sounabbhattacharjee@gmail.com</span>
           </a>
           <a
-            href="https://www.linkedin.com/in/sounab-bhattacharjee-"
+            href="https://www.linkedin.com/in/sounab-bhattacharjee-aa3b3b266"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-4 text-white hover:text-yellow-400 transition-colors"
@@ -384,45 +365,48 @@ export default function Home() {
 
 function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-10 p-6 flex justify-between items-center bg-opacity-85">
-      <div className="text-white text-xl font-semibold">Sounab Bhattacharjee</div>
+    <header className="fixed top-0 left-0 right-0 z-10 backdrop-blur-sm p-4 md:p-6 flex justify-between items-center">
+      {/* Logo */}
+      <div className="flex items-center">
+        <Image src="/logo.png" alt="Not found" width={50} height={50} />
+        <span className="text-white text-lg font-semibold ml-2">Sounab's Portfolio</span>
+      </div>
+
+      {/* Navigation */}
       <nav>
-        <ul className="flex space-x-6 text-white">
-          <li>
-            <a
-              href="#"
-              className="relative hover:text-yellow-400 transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-[-2px] after:h-[2px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300"
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="relative hover:text-yellow-400 transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-[-2px] after:h-[2px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300"
-            >
-              About Me
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="relative hover:text-yellow-400 transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-[-2px] after:h-[2px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300"
-            >
-              Projects
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="relative hover:text-yellow-400 transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-[-2px] after:h-[2px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300"
-            >
-              Contact
-            </a>
-          </li>
+        <ul className="hidden md:flex space-x-6 text-white">
+          {["Home", "About Me", "Projects", "Contact"].map((item) => (
+            <li key={item}>
+              <a
+                href={`#${item.toLowerCase().replace(" ", "-")}`}
+                className="relative hover:text-yellow-400 transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-yellow-400 after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
-    </header>    
-  )
-}
 
+      {/* Mobile Menu */}
+      <div className="md:hidden">
+        <button className="text-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+  );
+}
