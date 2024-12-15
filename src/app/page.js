@@ -40,6 +40,15 @@ export default function Home() {
   const [currentBackground, setCurrentBackground] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const sectionRefs = useRef([])
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+  const [isCursorVisible, setIsCursorVisible] = useState(true)
+
+  const updateCursorPosition = (e) => {
+    setCursorPosition({ x: e.clientX, y: e.clientY })
+  }
+
+  const hideCursor = () => setIsCursorVisible(false)
+  const showCursor = () => setIsCursorVisible(true)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +58,10 @@ export default function Home() {
       const progress = Math.min(scrollPosition / secondSectionTop, 1)
       setScrollProgress(progress)
     }
+
+    window.addEventListener('mousemove', updateCursorPosition)
+    window.addEventListener('mouseleave', hideCursor)
+    window.addEventListener('mouseenter', showCursor)
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -71,11 +84,27 @@ export default function Home() {
     return () => {
       observer.disconnect()
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', updateCursorPosition)
+      window.removeEventListener('mouseleave', hideCursor)
+      window.removeEventListener('mouseenter', showCursor)
     }
   }, [])
 
   return (
     <main className="min-h-screen">
+
+      <div
+        className={`fixed z-50 w-10 h-10 border-2 border-white rounded-full pointer-events-none transform transition-transform duration-150 ease-out ${
+          isCursorVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          backgroundColor: 'transparent', 
+          left: cursorPosition.x - 20,
+          top: cursorPosition.y - 20,
+        }}
+      ></div>
+
+
       <div className="fixed inset-0 z-[-1] transition-opacity duration-1000">
         <Image
           src={backgrounds[0]}
