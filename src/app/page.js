@@ -169,14 +169,25 @@ export default function Home() {
       
       <section
         ref={(el) => (sectionRefs.current[1] = el)}
-        className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-purple-900 bg-opacity-50" id="about-me"
+        className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-purple-900 bg-opacity-50"
+        id="about-me"
       >
         <div className="max-w-6xl w-full flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="md:w-1/2">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">About Me</h2>
-            <p className="text-base sm:text-lg md:text-xl text-white mb-4 sm:mb-8">
-              I am a passionate and dedicated 3rd-year B.Tech student majoring in Computer Science from Kolkata, India. With a strong foundation in full-stack web development, I have worked on some projects, hence honing my skills. Beyond coding, I enjoy playing football, which keeps me active and disciplined, and watching anime, which inspires my creativity and storytelling perspective. I am driven by a love for learning and a commitment to building impactful digital solutions.
-            </p>
+            <div className="relative p-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-lg">
+              <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
+                  About Me
+                </h2>
+                <p className="text-base sm:text-lg md:text-xl text-gray-800 dark:text-gray-300 mb-4 sm:mb-8">
+                  I am a passionate and dedicated 3rd-year B.Tech student majoring in Computer Science from Kolkata, India.
+                  With a strong foundation in full-stack web development, I have worked on some projects, hence honing my
+                  skills. Beyond coding, I enjoy playing football, which keeps me active and disciplined, and watching anime,
+                  which inspires my creativity and storytelling perspective. I am driven by a love for learning and a commitment
+                  to building impactful digital solutions.
+                </p>
+              </div>
+            </div>
           </div>
           <div className="w-full md:w-auto">
             <CardContainer className="inter-var">
@@ -202,6 +213,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+
       <section
         ref={(el) => (sectionRefs.current[2] = el)}
         className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 bg-black bg-opacity-50" id="skills"
@@ -251,7 +264,7 @@ export default function Home() {
               <Hexagon className="w-6 h-6 text-white" />
               <h3 className="text-lg sm:text-xl font-semibold text-white">
                 Backend Dev
-                <span className="block text-red-500">NodeJs, MongoDB</span>
+                <span className="block text-red-500">NodeJs, MongoDB, Fast API</span>
               </h3>
             </div>
             <div className="font-mono text-xs sm:text-sm text-gray-400">
@@ -260,7 +273,7 @@ export default function Home() {
                 Skilled in developing<br />
                 scalable backend systems<br />
                 and API solutions using<br />
-                NodeJs and MongoDB, delivering<br />
+                NodeJs,Fast API and MongoDB, delivering<br />
                 efficient server-side applications
               </p>
               <span className="text-gray-500">&lt;/h3&gt;</span>
